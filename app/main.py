@@ -29,7 +29,7 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.post("/items")
+@app.post("/items", status_code=201)
 async def create_item(item: ItemSchema, db: Session = Depends(get_db)):
     """
     add a product
