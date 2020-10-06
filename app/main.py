@@ -1,19 +1,25 @@
+# standard lib
+import time
+
 # public modules
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Request
 from sqlalchemy.orm import Session
 from typing import List
 
 # from this project
 
 from . import models, schemas
-from app.models import *
-from app.schemas import *
+from app.models import ItemModel
+from app.schemas import ItemSchema
+from app.middleware import ResponseTime
 
 from .database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.add_middleware(ResponseTime)
+
 
 # Dependency
 def get_db():
