@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from schemas import Item
 
 app = FastAPI()
 
@@ -8,10 +9,10 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.get("/products")
-async def products():
+@app.post("/items")
+async def create_item(item: Item):
     """
     add a product
     """
-    return {"message": "product added"}
+    return item
 
